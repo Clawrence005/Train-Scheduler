@@ -1,0 +1,12 @@
+body{
+    background-color:rgb(243, 106, 106);
+}
+ #main-container{
+/* border: solid 2px red; */
+width: 90%;
+margin: auto;
+
+}
+#form-container{
+    margin-top: 2rem;
+}
