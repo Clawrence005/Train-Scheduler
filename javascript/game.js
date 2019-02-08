@@ -1,4 +1,17 @@
+//clock time
+var datetime = null,
+    date = null;
 
+var updateCurrentTime = function () {
+    date = moment(new Date())
+    datetime.html(date.format('dddd, MM Do YYYY, HH:mm:ss'));
+};
+
+$(document).ready(function () {
+    datetime = $('#div-date')
+    updateCurrentTime();
+    setInterval(updateCurrentTime, 1000);
+});
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyC0HJ2T98Gx_sl0f0gHZRFjNaAl19L9lFw",
@@ -13,8 +26,6 @@ var database = firebase.database();
 //create click button, then create vars grabbing user input from form
 $("#submit").on("click", function (event) {
     event.preventDefault();
-
-
 
     var trainName = $("#name-input").val().trim();
     var trainDest = $("#dest-input").val().trim();
@@ -49,8 +60,6 @@ $("#submit").on("click", function (event) {
     $("#time-input").val("");
     $("#freq-input").val("");
 
-
-
 });
 ///////////////////////create on child added event///////////////////////////
 database.ref().on("child_added", function (childSnapshot) {
@@ -67,44 +76,51 @@ database.ref().on("child_added", function (childSnapshot) {
     console.log(trainFreq);
 
     //Math/////////////////
-    var freq = 15;
-    pickedFrequency = "minutes";
-    var hourMinFormat = "HH:mm:ss";
-    var freqMinutesFromNow = moment().add(-trainFreq, 'minutes').format('hh:mm');
+    // var currentTime = moment().format("HH:mm:ss");
+    var trainTimeFormat = moment(trainTime, "HH:mm ");
 
-    var freqThing = moment(freqMinutesFromNow, hourMinFormat).fromNow();
-    console.log("freq " + freq + ", min  :" + pickedFrequency + ", freqMinutes :" + freqMinutesFromNow);
-    console.log(" freqThing:" + freqThing);
+    // var now = moment(); //now 
+    // var start = moment("03:05 AM", "hh:mm A"); // today at 3AM
+    // var frequency = 10;
 
-    var currentTime = moment().format("hh:mm:ss");
-    var trainTimeFormat = moment(trainTime, "HH:mm");
-    // var isTime = moment(trainTime, 'minutes').format('hh:mm');
+    // var minutesElapsed = now.diff(start, "minutes");
 
+    // var stopsElapsed = Math.floor(minutesElapsed / frequency);
+
+    // var tFrequency = 3;
+    // Time is 3:30 AM
+    var firstTime = trainTimeFormat;
+    // First Time (pushed back 1 year to make sure it comes before current time)
+    var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+    console.log(firstTimeConverted);
+    // Current Time
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+    // Difference between the times
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+    // Time apart (remainder)
+    var tRemainder = diffTime % trainFreq;
+    console.log(tRemainder);
+    // Minute Until Train
+    var tMinutesTillTrain = trainFreq - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+    // Next Train
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
     //push html #train-table
     var newRow = $("<tr>").append(
         $("<td>").text(trainName),           //Deutsche Bahn
         $("<td>").text(trainDest),           //Stuttgart
         $("<td>").text(trainFreq + " min"),  //every 15 min
-        $("<td>").text(trainTime),           //22:00
+        // $("<td>").text(trainTime),           //22:00
         ///////////////////Math
-
         $("<td>").text(trainTimeFormat),
-        $("<td>").text(currentTime),
-
-        $("<td>").text(moment().add(trainFreq, 'm').format('hh:mm')),
-
-        $("<td>").text(moment().add(-trainFreq, 'minutes').format('hh:mm')),
-
-        $("<td>").text(freqMinutesFromNow),
-
+        $("<td>").text(nextTrain),
+        $("<td>").text(tMinutesTillTrain),
     );
 
     $("#train-table> tbody").append(newRow);
 
 });
-
-
-
-
-
