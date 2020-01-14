@@ -12,4 +12,4 @@ A webpage using MomentJs, firebase database to dynamically create new train info
 
 ## [Click here to see the Train Scheduler website](https://clawrence005.github.io/Train-Scheduler/) 
 
-![finished website](./public/assets/images/finished-website.jpg)
+![finished website](./img/finished-website.jpg)
