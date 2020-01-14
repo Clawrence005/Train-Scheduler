@@ -103,7 +103,7 @@ database.ref().on("child_added", function (childSnapshot) {
     var tRemainder = diffTime % trainFreq;
     console.log(tRemainder);
     // Minute Until Train
-    var tMinutesTillTrain = trainFreq - tRemainder;
+    var tMinutesTillTrain = (trainFreq - tRemainder).format("hh:mm");
     console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
     // Next Train
     var nextTrain = moment().add(tMinutesTillTrain, "minutes");

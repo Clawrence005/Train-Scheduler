@@ -66,49 +66,52 @@
           </div>
         </div>
       </div>
-    </div>
-    <!-- ----------------------------------------------------- -->
-    <div id="form-container">
-      <div id="container">
-        <div class="card">
-          <div class="card-header">
-            <h3> Add Train Information</h3>
-            <form>
-              <div class="form-group" id="schedule">
+      <!-- ----------------------------------------------------- -->
+      <div id="form-container">
+        <div id="container">
+          <div class="card">
+            <div class="card-header">
+              <h3> Add Train Information</h3>
+              <form>
+                <div class="form-group" id="schedule">
 
-                <div class="form-group">
-                  <label for="name-input">Train Name:</label>
-                  <input class="form-control" id="name-input" type="text" placeholder="Deutsche Bahn">
+                  <div class="form-group">
+                    <label for="name-input">Train Name:</label>
+                    <input class="form-control" id="name-input" type="text" placeholder="Deutsche Bahn">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="dest-input">Destination</label>
+                    <input class="form-control" id="dest-input" type="text" placeholder="Frankfurt">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="time-input"></label>First Train Time (military time)</label>
+                    <input class="form-control" id="time-input" type="text" placeholder="22:00">
+                    <!-- min="13:00" max="24:00" -->
+                  </div>
+
+                  <div class="form-group">
+                    <label for="freq-input">Frequency (min)</label>
+                    <input class="form-control" id="freq-input" type="text" placeholder="Every 15 min">
+                  </div>
                 </div>
+                <button type="submit" class="btn btn-danger" id="submit">Submit</button>
 
-                <div class="form-group">
-                  <label for="dest-input">Destination</label>
-                  <input class="form-control" id="dest-input" type="text" placeholder="Frankfurt">
-                </div>
+              </form>
 
-                <div class="form-group">
-                  <label for="time-input"></label>First Train Time (military time)</label>
-                  <input class="form-control" id="time-input" type="text" placeholder="22:00">
-                  <!-- min="13:00" max="24:00" -->
-                </div>
-
-                <div class="form-group">
-                  <label for="freq-input">Frequency (min)</label>
-                  <input class="form-control" id="freq-input" type="text" placeholder="Every 15 min">
-                </div>
-              </div>
-              <button type="submit" class="btn btn-danger" id="submit">Submit</button>
-
-            </form>
-
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <!-- firebase -->
-          <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 
-          <!-- javascript -->
-          <script src="javascript/game.js"></script>
-          <script src="javascript/clock.js"></script>
+    <!-- javascript -->
+    <script src="javascript/game.js"></script>
+    <script src="javascript/clock.js"></script>
 </body>
 
 </html>
